@@ -44,22 +44,22 @@ val MdLightSurfaceContainerHigh = Color(0xFFDCDEE6)     // Elevated selection di
 val MdLightSurfaceContainerHighest = Color(0xFFD6D9E0)  // Highest elevation overlays
 
 // ==============================================================================
-// Dark Color Scheme Tokens — Refined Dark Charcoal with Clear M3 Tonal Hierarchy (~5% deeper)
-// Soft, refined dark theme avoiding pure/near-black AMOLED darkness
+// Dark Color Scheme Tokens — 90% Deep AMOLED Darkness + 18% Material You Tonal Wash
+// Deep AMOLED-dark with rich tonal hierarchy, avoiding flat grey/charcoal
 // ==============================================================================
 val MdDarkPrimary = Color(0xFFA8C7FA)
 val MdDarkOnPrimary = Color(0xFF083063)
-val MdDarkPrimaryContainer = Color(0xFF204270)
+val MdDarkPrimaryContainer = Color(0xFF1D3B68)
 val MdDarkOnPrimaryContainer = Color(0xFFD3E3FD)
 
 val MdDarkSecondary = Color(0xFFBCC7DB)
-val MdDarkOnSecondary = Color(0xFF263140)
-val MdDarkSecondaryContainer = Color(0xFF394252)
+val MdDarkOnSecondary = Color(0xFF1E2838)
+val MdDarkSecondaryContainer = Color(0xFF2F3B4E)
 val MdDarkOnSecondaryContainer = Color(0xFFD8E3F8)
 
 val MdDarkTertiary = Color(0xFFD7BEE4)
-val MdDarkOnTertiary = Color(0xFF3B2948)
-val MdDarkTertiaryContainer = Color(0xFF4D3B59)
+val MdDarkOnTertiary = Color(0xFF33203E)
+val MdDarkTertiaryContainer = Color(0xFF453052)
 val MdDarkOnTertiaryContainer = Color(0xFFF3DAFF)
 
 val MdDarkError = Color(0xFFFFB4AB)
@@ -67,19 +67,19 @@ val MdDarkOnError = Color(0xFF690005)
 val MdDarkErrorContainer = Color(0xFF93000A)
 val MdDarkOnErrorContainer = Color(0xFFFFDAD6)
 
-// Base background & surface: refined dark charcoal
-val MdDarkBackground = Color(0xFF17191E)
+// Base background & surface: 5–10% deeper AMOLED-black base with subtly visible wallpaper-derived tint
+val MdDarkBackground = Color(0xFF020408)
 val MdDarkOnBackground = Color(0xFFE2E2E9)
-val MdDarkSurface = Color(0xFF17191E)
+val MdDarkSurface = Color(0xFF020408)
 val MdDarkOnSurface = Color(0xFFE2E2E9)
-val MdDarkSurfaceVariant = Color(0xFF383C44)
+val MdDarkSurfaceVariant = Color(0xFF171B26)
 val MdDarkOnSurfaceVariant = Color(0xFFC4C6D0)
-val MdDarkOutline = Color(0xFF868A91)
-val MdDarkOutlineVariant = Color(0xFF2C3038)
+val MdDarkOutline = Color(0xFF7A8090)
+val MdDarkOutlineVariant = Color(0xFF1C202C)
 
-// Dark Tonal Surface Hierarchy (distinguishable, calm steps)
-val MdDarkSurfaceContainerLowest = Color(0xFF121418)
-val MdDarkSurfaceContainerLow = Color(0xFF1F2229)       // Used for Sunny compass dial
-val MdDarkSurfaceContainer = Color(0xFF242730)          // Used for Settings rounded containers
-val MdDarkSurfaceContainerHigh = Color(0xFF2E323C)      // Used for dialogs and elevated elements
-val MdDarkSurfaceContainerHighest = Color(0xFF383C47)   // Used for highest elevation overlays
+// Dark Tonal Surface Hierarchy (~8% deeper AMOLED base + 18% tonal step)
+val MdDarkSurfaceContainerLowest = Color(0xFF020304)
+val MdDarkSurfaceContainerLow = Color(0xFF0A0D15)       // Compass Dial surface
+val MdDarkSurfaceContainer = Color(0xFF10141E)          // Settings grouped containers
+val MdDarkSurfaceContainerHigh = Color(0xFF171B26)      // Elevated dialogs
+val MdDarkSurfaceContainerHighest = Color(0xFF1E2330)   // Highest elevation overlays

@@ -145,23 +145,25 @@ private fun buildDynamicLightColorScheme(context: Context): ColorScheme {
 
 /**
  * Builds the Dynamic Dark color scheme using the Android 12+ Monet engine
- * with a refined dark charcoal background, subtle dynamic tinting from wallpaper palette,
- * and a clear, elegant Material You tonal surface hierarchy.
+ * with an extra-deep AMOLED-black background while preserving the wallpaper-derived Material You dynamic tint.
  */
 private fun buildDynamicDarkColorScheme(context: Context): ColorScheme {
     val dynamic = dynamicDarkColorScheme(context)
     val dynamicPrimary = dynamic.primary
 
-    // Subtle Material You tonal wash over calm dark charcoal base (avoiding pure AMOLED black)
-    val baseCharcoal = Color(0xFF17191E)
-    val tintedBg = blendColor(baseCharcoal, dynamicPrimary, 0.04f)
-    val tintedSurface = blendColor(baseCharcoal, dynamicPrimary, 0.04f)
-    val tintedContainerLowest = Color(0xFF121418)
-    val tintedContainerLow = blendColor(Color(0xFF1F2229), dynamicPrimary, 0.07f)   // Compass Dial surface
-    val tintedContainer = blendColor(Color(0xFF242730), dynamicPrimary, 0.08f)      // Settings grouped containers
-    val tintedContainerHigh = blendColor(Color(0xFF2E323C), dynamicPrimary, 0.10f)  // Elevated dialogs
-    val tintedContainerHighest = blendColor(Color(0xFF383C47), dynamicPrimary, 0.12f)
-    val tintedOutlineVariant = blendColor(Color(0xFF323640), dynamicPrimary, 0.05f)
+    // Main & Settings background: 5–10% deeper AMOLED-black base with subtly visible wallpaper-derived dynamic tint
+    val backgroundAmoledBase = Color(0xFF010204)
+    val tintedBg = blendColor(backgroundAmoledBase, dynamicPrimary, 0.12f)
+    val tintedSurface = blendColor(backgroundAmoledBase, dynamicPrimary, 0.12f)
+
+    // Unchanged container and elevated surfaces preserving exact tonal hierarchy
+    val tintedContainerLowest = Color(0xFF000102)
+    val tintedContainerLow = blendColor(Color(0xFF07080E), dynamicPrimary, 0.18f)      // Compass Dial surface (unchanged)
+    val tintedContainer = blendColor(Color(0xFF0D1017), dynamicPrimary, 0.18f)         // Settings grouped containers (unchanged)
+    val tintedContainerHigh = blendColor(Color(0xFF141720), dynamicPrimary, 0.18f)     // Elevated dialogs (unchanged)
+    val tintedContainerHighest = blendColor(Color(0xFF1A1E28), dynamicPrimary, 0.18f)  // Highest elevation overlays (unchanged)
+    val tintedSurfaceVariant = blendColor(Color(0xFF151922), dynamicPrimary, 0.18f)
+    val tintedOutlineVariant = blendColor(Color(0xFF1E222D), dynamicPrimary, 0.15f)
 
     return dynamic.copy(
         background = tintedBg,
@@ -171,6 +173,7 @@ private fun buildDynamicDarkColorScheme(context: Context): ColorScheme {
         surfaceContainer = tintedContainer,
         surfaceContainerHigh = tintedContainerHigh,
         surfaceContainerHighest = tintedContainerHighest,
+        surfaceVariant = tintedSurfaceVariant,
         outlineVariant = tintedOutlineVariant
     )
 }

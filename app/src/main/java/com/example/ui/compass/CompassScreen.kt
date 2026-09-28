@@ -86,16 +86,16 @@ fun CompassScreen(
                     .padding(start = spacing.large, end = 8.dp, top = spacing.small, bottom = spacing.small)
             )
 
-            // Central Area containing the centered Compass Dial
+            // Central Area containing the centered Compass Dial (increased by ~16-18%)
             BoxWithConstraints(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
-                    .padding(horizontal = spacing.medium)
+                    .padding(horizontal = spacing.small)
             ) {
-                // Responsive calculation for dial diameter leaving generous whitespace
-                val dialSize = min(maxWidth * 0.88f, maxHeight * 0.74f).coerceIn(260.dp, 380.dp)
+                // Responsive calculation for dial diameter (~16–18% larger)
+                val dialSize = min(maxWidth * 0.96f, maxHeight * 0.86f).coerceIn(300.dp, 440.dp)
 
                 if (!compassState.isSensorAvailable) {
                     // Graceful fallback for devices without orientation sensors
