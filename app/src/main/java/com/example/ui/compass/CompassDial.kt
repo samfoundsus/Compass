@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -88,119 +89,130 @@ fun CompassDial(
     headingDegrees: Float = 0f,
     currentDirection: String = "N"
 ) {
-    Surface(
-        shape = shape.shape,
-        color = MaterialTheme.colorScheme.surfaceContainerLow,
-        border = BorderStroke(
-            width = 1.dp,
-            color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.35f)
-        ),
-        tonalElevation = 2.dp,
-        modifier = modifier.testTag("compass_dial_surface")
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = modifier
     ) {
-        BoxWithConstraints(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier.fillMaxSize()
+        // 1. Rotating Outer Dial: Surface shape and outer directional markers rotate together
+        Surface(
+            shape = shape.shape,
+            color = MaterialTheme.colorScheme.surfaceContainerLow,
+            border = BorderStroke(
+                width = 1.dp,
+                color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.35f)
+            ),
+            tonalElevation = 2.dp,
+            modifier = Modifier
+                .fillMaxSize()
+                .graphicsLayer {
+                    rotationZ = -rotationDegrees
+                }
+                .testTag("compass_dial_surface")
         ) {
-            val sizePx = constraints.maxWidth.toFloat()
-            val radiusPx = sizePx / 2f
-
-            // 1. All 8 Directional Labels positioned by angle around the dial with shape-aware safe margins
-            DIRECTION_MARKERS.forEach { marker ->
-                val radialDistancePx = when (shape) {
-                    CompassDialShape.Diamond -> {
-                        when (marker.category) {
-                            MarkerCategory.CARDINAL -> radiusPx * 0.77f
-                            MarkerCategory.DIAGONAL -> radiusPx * 0.59f
-                        }
-                    }
-                    CompassDialShape.Octagon -> radiusPx * 0.72f
-                    else -> radiusPx * 0.77f
-                }
-
-                val angleRad = Math.toRadians((marker.angleDegrees - rotationDegrees).toDouble())
-                val xOffset = (radialDistancePx * sin(angleRad)).roundToInt()
-                val yOffset = (-radialDistancePx * cos(angleRad)).roundToInt()
-
-                val textStyle = when (marker.category) {
-                    MarkerCategory.CARDINAL -> OuterCardinalDirectionTextStyle
-                    MarkerCategory.DIAGONAL -> OuterDiagonalDirectionTextStyle
-                }
-
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier
-                        .align(Alignment.Center)
-                        .offset { IntOffset(xOffset, yOffset) }
-                        .testTag("dial_label_${marker.label}")
-                ) {
-                    Text(
-                        text = marker.label,
-                        style = textStyle,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        textAlign = TextAlign.Center
-                    )
-                }
-            }
-
-            // 2. Central Readout Area: ONE single parent container centered inside the dial
-            // The central vertical axis is established strictly by the digit "0".
-            // The degree symbol "°" sits naturally attached to the upper-right without shifting the center axis of N and arrow.
-            Box(
+            BoxWithConstraints(
                 contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .testTag("compass_center_readout")
+                modifier = Modifier.fillMaxSize()
             ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    // Degree value: "0" digit establishes the center axis; "°" is naturally attached to upper-right
+                val sizePx = constraints.maxWidth.toFloat()
+                val radiusPx = sizePx / 2f
+
+                // All 8 Directional Labels positioned on the dial with shape-aware safe margins
+                DIRECTION_MARKERS.forEach { marker ->
+                    val radialDistancePx = when (shape) {
+                        CompassDialShape.Diamond -> {
+                            when (marker.category) {
+                                MarkerCategory.CARDINAL -> radiusPx * 0.77f
+                                MarkerCategory.DIAGONAL -> radiusPx * 0.59f
+                            }
+                        }
+                        CompassDialShape.Octagon -> radiusPx * 0.72f
+                        else -> radiusPx * 0.77f
+                    }
+
+                    val angleRad = Math.toRadians(marker.angleDegrees.toDouble())
+                    val xOffset = (radialDistancePx * sin(angleRad)).roundToInt()
+                    val yOffset = (-radialDistancePx * cos(angleRad)).roundToInt()
+
+                    val textStyle = when (marker.category) {
+                        MarkerCategory.CARDINAL -> OuterCardinalDirectionTextStyle
+                        MarkerCategory.DIAGONAL -> OuterDiagonalDirectionTextStyle
+                    }
+
                     Box(
-                        contentAlignment = Alignment.Center
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                            .offset { IntOffset(xOffset, yOffset) }
+                            .testTag("dial_label_${marker.label}")
                     ) {
                         Text(
-                            text = "${headingDegrees.toInt()}",
-                            fontSize = 44.sp,
-                            lineHeight = 48.sp,
-                            fontWeight = FontWeight.Normal,
-                            letterSpacing = (-0.5).sp,
-                            color = MaterialTheme.colorScheme.onSurface,
+                            text = marker.label,
+                            style = textStyle,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
                             textAlign = TextAlign.Center
                         )
-                        Text(
-                            text = "°",
-                            fontSize = 27.sp,
-                            lineHeight = 27.sp,
-                            fontWeight = FontWeight.Normal,
-                            color = MaterialTheme.colorScheme.onSurface,
-                            modifier = Modifier
-                                .align(Alignment.TopEnd)
-                                .offset(x = 8.dp, y = 0.dp)
-                        )
                     }
+                }
+            }
+        }
 
-                    Spacer(modifier = Modifier.height(2.dp))
-
-                    // Center direction letter aligned directly with the center of the "0" digit
+        // 2. Fixed Central Readout Area: Stays stable and centered, independent of dial rotation
+        // The central vertical axis is established strictly by the digit "0".
+        // The degree symbol "°" sits naturally attached to the upper-right without shifting the center axis of N and arrow.
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .fillMaxSize()
+                .testTag("compass_center_readout")
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                // Degree value: "0" digit establishes the center axis; "°" is naturally attached to upper-right
+                Box(
+                    contentAlignment = Alignment.Center
+                ) {
                     Text(
-                        text = currentDirection,
-                        fontSize = 28.sp,
-                        lineHeight = 32.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        text = "${headingDegrees.toInt()}",
+                        fontSize = 44.sp,
+                        lineHeight = 48.sp,
+                        fontWeight = FontWeight.Normal,
+                        letterSpacing = (-0.5).sp,
+                        color = MaterialTheme.colorScheme.onSurface,
                         textAlign = TextAlign.Center
                     )
-
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    // Compass Pointer arrow directly below N on the exact same center axis
-                    CompassPointer(
-                        color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(width = 16.dp, height = 20.dp)
+                    Text(
+                        text = "°",
+                        fontSize = 27.sp,
+                        lineHeight = 27.sp,
+                        fontWeight = FontWeight.Normal,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier
+                            .align(Alignment.TopEnd)
+                            .offset(x = 8.dp, y = 0.dp)
                     )
                 }
+
+                Spacer(modifier = Modifier.height(2.dp))
+
+                // Center direction letter aligned directly with the center of the "0" digit
+                Text(
+                    text = currentDirection,
+                    fontSize = 28.sp,
+                    lineHeight = 32.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Compass Pointer arrow directly below on the exact same center axis
+                CompassPointer(
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(width = 16.dp, height = 20.dp)
+                )
             }
         }
     }
