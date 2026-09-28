@@ -1,5 +1,7 @@
 package com.example.navigation
 
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
@@ -12,6 +14,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.ui.compass.CompassScreen
 import com.example.ui.settings.SettingsScreen
+
+private const val TRANSITION_DURATION = 300
+private const val FADE_DURATION = 250
 
 @Composable
 fun CompassNavHost(
@@ -26,10 +31,30 @@ fun CompassNavHost(
     ) {
         composable(
             route = Screen.Compass.route,
-            enterTransition = { fadeIn() },
-            exitTransition = { fadeOut() },
-            popEnterTransition = { fadeIn() },
-            popExitTransition = { fadeOut() }
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -(it * 0.12f).toInt() },
+                    animationSpec = tween(TRANSITION_DURATION, easing = FastOutSlowInEasing)
+                ) + fadeIn(animationSpec = tween(TRANSITION_DURATION, easing = FastOutSlowInEasing))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -(it * 0.12f).toInt() },
+                    animationSpec = tween(TRANSITION_DURATION, easing = FastOutSlowInEasing)
+                ) + fadeOut(animationSpec = tween(FADE_DURATION, easing = FastOutSlowInEasing))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -(it * 0.12f).toInt() },
+                    animationSpec = tween(TRANSITION_DURATION, easing = FastOutSlowInEasing)
+                ) + fadeIn(animationSpec = tween(TRANSITION_DURATION, easing = FastOutSlowInEasing))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -(it * 0.12f).toInt() },
+                    animationSpec = tween(TRANSITION_DURATION, easing = FastOutSlowInEasing)
+                ) + fadeOut(animationSpec = tween(FADE_DURATION, easing = FastOutSlowInEasing))
+            }
         ) {
             CompassScreen(
                 onNavigateToSettings = {
@@ -41,16 +66,28 @@ fun CompassNavHost(
         composable(
             route = Screen.Settings.route,
             enterTransition = {
-                slideInHorizontally(initialOffsetX = { it / 4 }) + fadeIn()
+                slideInHorizontally(
+                    initialOffsetX = { (it * 0.15f).toInt() },
+                    animationSpec = tween(TRANSITION_DURATION, easing = FastOutSlowInEasing)
+                ) + fadeIn(animationSpec = tween(TRANSITION_DURATION, easing = FastOutSlowInEasing))
             },
             exitTransition = {
-                slideOutHorizontally(targetOffsetX = { it / 4 }) + fadeOut()
+                slideOutHorizontally(
+                    targetOffsetX = { (it * 0.15f).toInt() },
+                    animationSpec = tween(TRANSITION_DURATION, easing = FastOutSlowInEasing)
+                ) + fadeOut(animationSpec = tween(FADE_DURATION, easing = FastOutSlowInEasing))
             },
             popEnterTransition = {
-                slideInHorizontally(initialOffsetX = { -it / 4 }) + fadeIn()
+                slideInHorizontally(
+                    initialOffsetX = { (it * 0.15f).toInt() },
+                    animationSpec = tween(TRANSITION_DURATION, easing = FastOutSlowInEasing)
+                ) + fadeIn(animationSpec = tween(TRANSITION_DURATION, easing = FastOutSlowInEasing))
             },
             popExitTransition = {
-                slideOutHorizontally(targetOffsetX = { it / 4 }) + fadeOut()
+                slideOutHorizontally(
+                    targetOffsetX = { (it * 0.15f).toInt() },
+                    animationSpec = tween(TRANSITION_DURATION, easing = FastOutSlowInEasing)
+                ) + fadeOut(animationSpec = tween(FADE_DURATION, easing = FastOutSlowInEasing))
             }
         ) {
             SettingsScreen(

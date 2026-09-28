@@ -25,6 +25,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -56,6 +57,7 @@ fun CompassScreen(
 
     // UI-only lock state
     var isLocked by remember { mutableStateOf(false) }
+    var lockedHeading by remember { mutableFloatStateOf(0f) }
 
     Surface(
         color = MaterialTheme.colorScheme.surface,
@@ -67,14 +69,21 @@ fun CompassScreen(
                 .statusBarsPadding()
                 .navigationBarsPadding()
         ) {
-            // Top App Bar Area (blends seamlessly with screen background)
+            // Top App Bar Area (blends seamlessly with screen background, buttons spaced toward right)
             CompassTopBar(
                 isLocked = isLocked,
-                onToggleLock = { isLocked = !isLocked },
+                onToggleLock = {
+                    if (!isLocked) {
+                        lockedHeading = compassState.heading
+                        isLocked = true
+                    } else {
+                        isLocked = false
+                    }
+                },
                 onNavigateToSettings = onNavigateToSettings,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = spacing.large, vertical = spacing.small)
+                    .padding(start = spacing.large, end = 8.dp, top = spacing.small, bottom = spacing.small)
             )
 
             // Central Area containing the centered Compass Dial
@@ -125,10 +134,12 @@ fun CompassScreen(
                         }
                     }
                 } else {
-                    // Real-time sensor-driven Compass Dial
+                    // Real-time sensor-driven Compass Dial (with rotation locking support)
+                    val activeRotation = if (isLocked) lockedHeading else compassState.heading
+
                     CompassDial(
                         shape = CompassDialSettings.currentShape,
-                        rotationDegrees = compassState.heading,
+                        rotationDegrees = activeRotation,
                         headingDegrees = compassState.heading,
                         currentDirection = compassState.direction,
                         modifier = Modifier.size(dialSize)

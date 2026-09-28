@@ -85,7 +85,6 @@ fun SettingsScreen(
     modifier: Modifier = Modifier,
     viewModel: CompassViewModel = viewModel()
 ) {
-    BackHandler(onBack = onNavigateBack)
     val context = LocalContext.current
     val spacing = CompassThemeTokens.spacing
     val compassState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -97,6 +96,18 @@ fun SettingsScreen(
     var showSmoothingDialog by remember { mutableStateOf(false) }
     var showCalibrationDialog by remember { mutableStateOf(false) }
     var showPermissionExplanationDialog by remember { mutableStateOf(false) }
+
+    BackHandler(enabled = true) {
+        when {
+            showThemeDialog -> showThemeDialog = false
+            showDialShapeDialog -> showDialShapeDialog = false
+            showNorthRefDialog -> showNorthRefDialog = false
+            showSmoothingDialog -> showSmoothingDialog = false
+            showCalibrationDialog -> showCalibrationDialog = false
+            showPermissionExplanationDialog -> showPermissionExplanationDialog = false
+            else -> onNavigateBack()
+        }
+    }
 
     // Permission launcher for Location (needed for True North & Magnetic Declination)
     val locationPermissionLauncher = rememberLauncherForActivityResult(
