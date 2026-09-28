@@ -1,0 +1,6 @@
+{
+  "name": "Compass",
+  "description": "Native Android compass with clean, modern Material Design 3 styling and accurate orientation tracking foundation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

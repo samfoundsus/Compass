@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dynamic Material You Launcher Icon Colors on Android 12+ -->
+    <color name="ic_launcher_background_color">#FFFFFF</color>
+    <color name="ic_launcher_accent">@android:color/system_accent1_500</color>
+    <color name="ic_launcher_needle_white">#FFFFFF</color>
+
+    <!-- Dynamic Material You Splash Screen Light Color (~15% subtle Monet tint) -->
+    <color name="splash_background">@android:color/system_neutral2_50</color>
+</resources>

@@ -1,0 +1,84 @@
+<resources>
+    <string name="app_name">Compass</string>
+    
+    <!-- Navigation & Titles -->
+    <string name="title_compass">Compass</string>
+    <string name="title_settings">Settings</string>
+    <string name="action_settings">Open settings</string>
+    <string name="action_back">Navigate back</string>
+    <string name="action_lock_heading">Lock current heading</string>
+    <string name="action_unlock_heading">Unlock heading</string>
+    <string name="action_target_heading">Set target heading</string>
+    <string name="action_calibrate">Calibrate</string>
+    <string name="dial_shape_sunny">Sunny</string>
+    <string name="dial_shape_circle">Circle</string>
+    <string name="dial_shape_diamond">Diamond</string>
+    <string name="dial_shape_octagon">Octagon</string>
+    
+    <!-- Compass Main Screen -->
+    <string name="compass_sensor_unavailable">Compass sensor unavailable on this device.</string>
+    <string name="compass_sensor_unavailable_desc">Orientation sensors could not be detected. Please use a device equipped with a compass or gyroscope sensor.</string>
+    <string name="compass_placeholder_heading">Direction Finder</string>
+    <string name="compass_placeholder_subtitle">Orientation and cardinal tracking will be activated here in the next phase.</string>
+    <string name="compass_placeholder_status">Ready for Sensor Integration</string>
+    <string name="compass_placeholder_card_title">Sensor Foundation</string>
+    <string name="compass_placeholder_card_desc">Phase 1 establishes the edge-to-edge layout, responsive Material 3 design system, and structured navigation.</string>
+    
+    <!-- Settings Screen Categories -->
+    <string name="settings_category_appearance">Appearance</string>
+    <string name="settings_theme_title">Theme</string>
+    <string name="settings_theme_desc">System default</string>
+    <string name="theme_system">System default</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="settings_dynamic_color_title">Dynamic Color</string>
+    <string name="settings_dynamic_color_desc">Use colors from your device\'s Material You color scheme.</string>
+    
+    <!-- Compass Settings -->
+    <string name="settings_category_compass">Compass</string>
+    <string name="settings_north_ref_title">North Reference</string>
+    <string name="settings_north_ref_magnetic">Magnetic North</string>
+    <string name="settings_north_ref_true">True North</string>
+    <string name="settings_declination_title">Magnetic Declination</string>
+    <string name="settings_declination_desc">Location required</string>
+    <string name="settings_declination_permission_required">Tap to enable location for automatic declination calculation</string>
+    <string name="settings_declination_unavailable">Location unavailable</string>
+    <string name="settings_smoothing_title">Sensor Smoothing</string>
+    <string name="settings_smoothing_adaptive">Adaptive</string>
+    <string name="settings_smoothing_adaptive_desc">Adaptive — Automatically balances stability and responsiveness.</string>
+    <string name="settings_smoothing_high">High Stability</string>
+    <string name="settings_smoothing_high_desc">High Stability — Maximum smoothing to eliminate jitter.</string>
+    <string name="settings_smoothing_low">Responsive</string>
+    <string name="settings_smoothing_low_desc">Responsive — Snappy tracking with minimal filtering.</string>
+    <string name="settings_haptics_title">Haptic Feedback</string>
+    <string name="settings_haptics_desc">Vibrate lightly when crossing cardinal directions (N, E, S, W).</string>
+    <string name="settings_dial_shape_title">Dial Shape</string>
+    <string name="settings_dial_shape_desc">Sunny</string>
+    
+    <!-- Calibration Dialog -->
+    <string name="settings_category_calibration">Calibration</string>
+    <string name="settings_calibration_title">Compass Calibration</string>
+    <string name="settings_calibration_desc">Improve compass accuracy by calibrating the device sensors.</string>
+    <string name="calibration_dialog_title">Calibrate Compass</string>
+    <string name="calibration_instruction">Hold your phone firmly and move it in a figure-8 motion repeatedly until sensor accuracy improves.</string>
+    <string name="calibration_accuracy_unreliable">Accuracy: Unreliable</string>
+    <string name="calibration_accuracy_low">Accuracy: Low</string>
+    <string name="calibration_accuracy_medium">Accuracy: Medium</string>
+    <string name="calibration_accuracy_high">Accuracy: High</string>
+    <string name="calibration_field_strength">Magnetic Field: %1$.1f µT</string>
+    <string name="calibration_field_normal">Normal Earth magnetic field is typically 25 to 65 µT.</string>
+    <string name="calibration_done">Done</string>
+    
+    <!-- Location Dialog -->
+    <string name="location_permission_dialog_title">Location Permission Required</string>
+    <string name="location_permission_dialog_desc">True North requires your current location to compute the local magnetic declination angle using the World Magnetic Model. Your location is processed entirely on-device and never stored or shared.</string>
+    <string name="permission_grant">Allow</string>
+    <string name="permission_cancel">Not now</string>
+    
+    <!-- About Section -->
+    <string name="settings_category_about">About</string>
+    <string name="settings_version_title">Version</string>
+    <string name="settings_version_desc">1.0.0</string>
+    <string name="settings_architecture_title">Architecture</string>
+    <string name="settings_architecture_desc">Jetpack Compose • Material 3 • Edge-to-Edge</string>
+</resources>
