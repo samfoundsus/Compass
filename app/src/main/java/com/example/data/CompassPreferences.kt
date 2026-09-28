@@ -156,24 +156,24 @@ object CompassPreferences {
             return
         }
 
-        val location = LocationDeclinationManager.getLastKnownLocation(context)
-        if (location != null) {
+        // Display current status or cached while requesting
+        if (declination != 0f) {
+            declinationStatus = formatDeclination(declination)
+        } else {
+            declinationStatus = "Locating..."
+        }
+
+        LocationDeclinationManager.requestLocation(context) { location ->
             val computedDeclination = LocationDeclinationManager.calculateDeclination(location)
             declination = computedDeclination
             prefs?.edit()?.putFloat(KEY_SAVED_DECLINATION, computedDeclination)?.apply()
             declinationStatus = formatDeclination(computedDeclination)
-        } else {
-            declinationStatus = if (declination != 0f) {
-                formatDeclination(declination) + " (Cached)"
-            } else {
-                "Location unavailable"
-            }
         }
     }
 
     private fun formatDeclination(dec: Float): String {
-        val sign = if (dec >= 0) "+" else ""
+        val sign = if (dec >= 0) "+" else "-"
         val direction = if (dec >= 0) "E" else "W"
-        return String.format("%s%.1f° %s", sign, kotlin.math.abs(dec), direction)
+        return String.format(java.util.Locale.US, "%s%.1f° %s", sign, kotlin.math.abs(dec), direction)
     }
 }

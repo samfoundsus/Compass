@@ -143,6 +143,9 @@ fun CompassDial(
                         modifier = Modifier
                             .align(Alignment.Center)
                             .offset { IntOffset(xOffset, yOffset) }
+                            .graphicsLayer {
+                                rotationZ = rotationDegrees
+                            }
                             .testTag("dial_label_${marker.label}")
                     ) {
                         Text(

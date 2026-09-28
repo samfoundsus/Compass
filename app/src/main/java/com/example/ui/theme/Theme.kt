@@ -145,22 +145,23 @@ private fun buildDynamicLightColorScheme(context: Context): ColorScheme {
 
 /**
  * Builds the Dynamic Dark color scheme using the Android 12+ Monet engine
- * with a refined dark charcoal background (~5% deeper) and visible Material You tonal surface wash.
+ * with a refined dark charcoal background, subtle dynamic tinting from wallpaper palette,
+ * and a clear, elegant Material You tonal surface hierarchy.
  */
 private fun buildDynamicDarkColorScheme(context: Context): ColorScheme {
     val dynamic = dynamicDarkColorScheme(context)
     val dynamicPrimary = dynamic.primary
 
-    // Subtle Material You tonal wash over ~5% darker refined dark charcoal base
-    val baseCharcoal = Color(0xFF181A1F)
-    val tintedBg = blendColor(baseCharcoal, dynamicPrimary, 0.03f)
-    val tintedSurface = blendColor(baseCharcoal, dynamicPrimary, 0.03f)
-    val tintedContainerLowest = Color(0xFF131519)
-    val tintedContainerLow = blendColor(Color(0xFF1E2026), dynamicPrimary, 0.06f)
-    val tintedContainer = blendColor(Color(0xFF23252B), dynamicPrimary, 0.08f)
-    val tintedContainerHigh = blendColor(Color(0xFF2E3138), dynamicPrimary, 0.10f)
-    val tintedContainerHighest = blendColor(Color(0xFF393C43), dynamicPrimary, 0.12f)
-    val tintedOutlineVariant = blendColor(Color(0xFF3F434A), dynamicPrimary, 0.08f)
+    // Subtle Material You tonal wash over calm dark charcoal base (avoiding pure AMOLED black)
+    val baseCharcoal = Color(0xFF17191E)
+    val tintedBg = blendColor(baseCharcoal, dynamicPrimary, 0.04f)
+    val tintedSurface = blendColor(baseCharcoal, dynamicPrimary, 0.04f)
+    val tintedContainerLowest = Color(0xFF121418)
+    val tintedContainerLow = blendColor(Color(0xFF1F2229), dynamicPrimary, 0.07f)   // Compass Dial surface
+    val tintedContainer = blendColor(Color(0xFF242730), dynamicPrimary, 0.08f)      // Settings grouped containers
+    val tintedContainerHigh = blendColor(Color(0xFF2E323C), dynamicPrimary, 0.10f)  // Elevated dialogs
+    val tintedContainerHighest = blendColor(Color(0xFF383C47), dynamicPrimary, 0.12f)
+    val tintedOutlineVariant = blendColor(Color(0xFF323640), dynamicPrimary, 0.05f)
 
     return dynamic.copy(
         background = tintedBg,

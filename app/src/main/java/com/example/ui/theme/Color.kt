@@ -67,19 +67,19 @@ val MdDarkOnError = Color(0xFF690005)
 val MdDarkErrorContainer = Color(0xFF93000A)
 val MdDarkOnErrorContainer = Color(0xFFFFDAD6)
 
-// Base background & surface: refined dark charcoal (~5% darker than 0xFF1B1D22)
-val MdDarkBackground = Color(0xFF181A1F)
+// Base background & surface: refined dark charcoal
+val MdDarkBackground = Color(0xFF17191E)
 val MdDarkOnBackground = Color(0xFFE2E2E9)
-val MdDarkSurface = Color(0xFF181A1F)
+val MdDarkSurface = Color(0xFF17191E)
 val MdDarkOnSurface = Color(0xFFE2E2E9)
-val MdDarkSurfaceVariant = Color(0xFF3F434A)
+val MdDarkSurfaceVariant = Color(0xFF383C44)
 val MdDarkOnSurfaceVariant = Color(0xFFC4C6D0)
 val MdDarkOutline = Color(0xFF868A91)
-val MdDarkOutlineVariant = Color(0xFF3F434A)
+val MdDarkOutlineVariant = Color(0xFF2C3038)
 
-// Dark Tonal Surface Hierarchy (~5% deeper, distinguishable, calm steps)
-val MdDarkSurfaceContainerLowest = Color(0xFF131519)
-val MdDarkSurfaceContainerLow = Color(0xFF1E2026)       // Used for Sunny compass dial
-val MdDarkSurfaceContainer = Color(0xFF23252B)          // Used for Settings rounded containers (~5% darker)
-val MdDarkSurfaceContainerHigh = Color(0xFF2E3138)      // Used for dialogs and elevated elements
-val MdDarkSurfaceContainerHighest = Color(0xFF393C43)   // Used for highest elevation overlays
+// Dark Tonal Surface Hierarchy (distinguishable, calm steps)
+val MdDarkSurfaceContainerLowest = Color(0xFF121418)
+val MdDarkSurfaceContainerLow = Color(0xFF1F2229)       // Used for Sunny compass dial
+val MdDarkSurfaceContainer = Color(0xFF242730)          // Used for Settings rounded containers
+val MdDarkSurfaceContainerHigh = Color(0xFF2E323C)      // Used for dialogs and elevated elements
+val MdDarkSurfaceContainerHighest = Color(0xFF383C47)   // Used for highest elevation overlays
