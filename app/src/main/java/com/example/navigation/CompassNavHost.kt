@@ -15,8 +15,9 @@ import androidx.navigation.compose.rememberNavController
 import com.example.ui.compass.CompassScreen
 import com.example.ui.settings.SettingsScreen
 
-private const val TRANSITION_DURATION = 300
-private const val FADE_DURATION = 250
+private const val SLIDE_DURATION = 320
+private const val FADE_IN_DURATION = 280
+private const val FADE_OUT_DURATION = 240
 
 @Composable
 fun CompassNavHost(
@@ -27,35 +28,33 @@ fun CompassNavHost(
     NavHost(
         navController = navController,
         startDestination = startDestination,
-        modifier = modifier
+        modifier = modifier,
+        enterTransition = {
+            slideInHorizontally(
+                initialOffsetX = { (it * 0.35f).toInt() },
+                animationSpec = tween(SLIDE_DURATION, easing = FastOutSlowInEasing)
+            ) + fadeIn(animationSpec = tween(FADE_IN_DURATION, easing = FastOutSlowInEasing))
+        },
+        exitTransition = {
+            slideOutHorizontally(
+                targetOffsetX = { -(it * 0.25f).toInt() },
+                animationSpec = tween(SLIDE_DURATION, easing = FastOutSlowInEasing)
+            ) + fadeOut(animationSpec = tween(FADE_OUT_DURATION, easing = FastOutSlowInEasing))
+        },
+        popEnterTransition = {
+            slideInHorizontally(
+                initialOffsetX = { -(it * 0.25f).toInt() },
+                animationSpec = tween(SLIDE_DURATION, easing = FastOutSlowInEasing)
+            ) + fadeIn(animationSpec = tween(FADE_IN_DURATION, easing = FastOutSlowInEasing))
+        },
+        popExitTransition = {
+            slideOutHorizontally(
+                targetOffsetX = { (it * 0.35f).toInt() },
+                animationSpec = tween(SLIDE_DURATION, easing = FastOutSlowInEasing)
+            ) + fadeOut(animationSpec = tween(FADE_OUT_DURATION, easing = FastOutSlowInEasing))
+        }
     ) {
-        composable(
-            route = Screen.Compass.route,
-            enterTransition = {
-                slideInHorizontally(
-                    initialOffsetX = { -(it * 0.12f).toInt() },
-                    animationSpec = tween(TRANSITION_DURATION, easing = FastOutSlowInEasing)
-                ) + fadeIn(animationSpec = tween(TRANSITION_DURATION, easing = FastOutSlowInEasing))
-            },
-            exitTransition = {
-                slideOutHorizontally(
-                    targetOffsetX = { -(it * 0.12f).toInt() },
-                    animationSpec = tween(TRANSITION_DURATION, easing = FastOutSlowInEasing)
-                ) + fadeOut(animationSpec = tween(FADE_DURATION, easing = FastOutSlowInEasing))
-            },
-            popEnterTransition = {
-                slideInHorizontally(
-                    initialOffsetX = { -(it * 0.12f).toInt() },
-                    animationSpec = tween(TRANSITION_DURATION, easing = FastOutSlowInEasing)
-                ) + fadeIn(animationSpec = tween(TRANSITION_DURATION, easing = FastOutSlowInEasing))
-            },
-            popExitTransition = {
-                slideOutHorizontally(
-                    targetOffsetX = { -(it * 0.12f).toInt() },
-                    animationSpec = tween(TRANSITION_DURATION, easing = FastOutSlowInEasing)
-                ) + fadeOut(animationSpec = tween(FADE_DURATION, easing = FastOutSlowInEasing))
-            }
-        ) {
+        composable(route = Screen.Compass.route) {
             CompassScreen(
                 onNavigateToSettings = {
                     navController.navigate(Screen.Settings.route)
@@ -63,33 +62,7 @@ fun CompassNavHost(
             )
         }
 
-        composable(
-            route = Screen.Settings.route,
-            enterTransition = {
-                slideInHorizontally(
-                    initialOffsetX = { (it * 0.15f).toInt() },
-                    animationSpec = tween(TRANSITION_DURATION, easing = FastOutSlowInEasing)
-                ) + fadeIn(animationSpec = tween(TRANSITION_DURATION, easing = FastOutSlowInEasing))
-            },
-            exitTransition = {
-                slideOutHorizontally(
-                    targetOffsetX = { (it * 0.15f).toInt() },
-                    animationSpec = tween(TRANSITION_DURATION, easing = FastOutSlowInEasing)
-                ) + fadeOut(animationSpec = tween(FADE_DURATION, easing = FastOutSlowInEasing))
-            },
-            popEnterTransition = {
-                slideInHorizontally(
-                    initialOffsetX = { (it * 0.15f).toInt() },
-                    animationSpec = tween(TRANSITION_DURATION, easing = FastOutSlowInEasing)
-                ) + fadeIn(animationSpec = tween(TRANSITION_DURATION, easing = FastOutSlowInEasing))
-            },
-            popExitTransition = {
-                slideOutHorizontally(
-                    targetOffsetX = { (it * 0.15f).toInt() },
-                    animationSpec = tween(TRANSITION_DURATION, easing = FastOutSlowInEasing)
-                ) + fadeOut(animationSpec = tween(FADE_DURATION, easing = FastOutSlowInEasing))
-            }
-        ) {
+        composable(route = Screen.Settings.route) {
             SettingsScreen(
                 onNavigateBack = {
                     navController.popBackStack()
