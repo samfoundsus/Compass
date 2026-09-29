@@ -18,6 +18,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         CompassPreferences.init(applicationContext)
+        com.example.widget.CompassWidgetUpdateManager.startSensorStreamIfWidgetsExist(applicationContext)
         enableEdgeToEdge()
         setContent {
             val systemDark = isSystemInDarkTheme()
@@ -43,5 +44,6 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         CompassPreferences.checkAndEnforcePermissionState(applicationContext)
+        com.example.widget.CompassWidgetUpdateManager.startSensorStreamIfWidgetsExist(applicationContext)
     }
 }

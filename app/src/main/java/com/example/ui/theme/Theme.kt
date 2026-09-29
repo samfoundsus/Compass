@@ -99,7 +99,7 @@ private val LightColorScheme = lightColorScheme(
 /**
  * Interpolates between a base surface color and a tint color for subtle Material You tonal washes.
  */
-private fun blendColor(base: Color, tint: Color, factor: Float): Color {
+fun blendColor(base: Color, tint: Color, factor: Float): Color {
     val f = factor.coerceIn(0f, 1f)
     return Color(
         red = base.red * (1f - f) + tint.red * f,
@@ -114,7 +114,7 @@ private fun blendColor(base: Color, tint: Color, factor: Float): Color {
  * with a subtle ~10–12% wallpaper-derived background tint and ~15–18% dial/container tint,
  * ensuring the light theme never appears as static/pure white #FFFFFF.
  */
-private fun buildDynamicLightColorScheme(context: Context): ColorScheme {
+fun buildDynamicLightColorScheme(context: Context): ColorScheme {
     val dynamic = dynamicLightColorScheme(context)
     val dynamicPrimary = dynamic.primary
 
@@ -147,7 +147,7 @@ private fun buildDynamicLightColorScheme(context: Context): ColorScheme {
  * Builds the Dynamic Dark color scheme using the Android 12+ Monet engine
  * with an extra-deep AMOLED-black background while preserving the wallpaper-derived Material You dynamic tint.
  */
-private fun buildDynamicDarkColorScheme(context: Context): ColorScheme {
+fun buildDynamicDarkColorScheme(context: Context): ColorScheme {
     val dynamic = dynamicDarkColorScheme(context)
     val dynamicPrimary = dynamic.primary
 

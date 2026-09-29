@@ -81,4 +81,11 @@
     <string name="settings_version_desc">1.0.0</string>
     <string name="settings_architecture_title">Architecture</string>
     <string name="settings_architecture_desc">Jetpack Compose • Material 3 • Edge-to-Edge</string>
+
+    <!-- Widget -->
+    <string name="widget_name">Compass</string>
+    <string name="widget_description">At-a-glance directional compass widget with customizable dial shape.</string>
+    <string name="widget_configure_title">Select Dial Shape</string>
+    <string name="widget_configure_subtitle">Choose the dial shape for this home screen widget.</string>
+    <string name="widget_configure_add_button">Add Widget</string>
 </resources>
