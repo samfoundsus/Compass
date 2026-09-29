@@ -1,53 +1,63 @@
 # Compass
 
-A minimal, native Android compass built with Kotlin and Jetpack Compose, designed with a clean Material You / Pixel-inspired interface.
+A minimal and modern native Android compass built with Kotlin and Jetpack Compose, featuring a clean Material You / Pixel-inspired interface.
 
 ## Features
 
-- 🧭 Real-time compass heading using device sensors
-- 🧲 Magnetic North and True North support
-- 📍 Location-based magnetic declination
-- 🎨 Material You Dynamic Color support
-- 🌙 Light, Dark, and System themes
-- 🔷 Multiple compass dial shapes:
+- 🧭 Real-time sensor-based compass
+- 🧲 Magnetic North and True North
+- 📍 Automatic magnetic declination using device location
+- 🎨 Material You Dynamic Color
+- 🌗 Light, Dark and System themes
+- 🌑 AMOLED-inspired Dark Theme
+- 🔷 Four dial styles:
   - Sunny
   - Circle
   - Diamond
   - Octagon
 - 🔄 Smooth real-time dial rotation
 - 🔒 Dial position lock
-- 📳 Optional haptic feedback for cardinal directions
-- 🛠️ Built-in compass calibration flow
-- ⚙️ Dedicated settings with persistent preferences
-- ♿ Accessibility-focused controls and touch targets
-- 📱 Native Android UI with responsive layouts
+- 📳 Optional haptic feedback
+- 🎯 Compass calibration
+- ⚙️ Persistent settings
+- 🧩 Home-screen Compass widgets
+- 🎨 Widget-specific dial shape selection
+- 📱 Dynamic Color support for widgets
+- 🔗 Widget opens the main Compass app
 
-## Tech Stack
+## Widgets
 
-- **Kotlin**
-- **Jetpack Compose**
-- **Material 3**
-- **Android Sensor Framework**
-- **Android Location APIs**
-- **Material You Dynamic Color**
+The app includes native Android home-screen widgets with the same Compass dial designs used in the main app.
+
+Each widget can independently use one of the four dial shapes:
+
+**Sunny · Circle · Diamond · Octagon**
+
+Widgets support live compass movement and Material You Dynamic Color, adapting to the device's current wallpaper/theme.
 
 ## Design
 
-The app follows a minimal, spacious and modern Android design language inspired by Google's Pixel and Material You ecosystem.
+Compass follows a minimal, spacious and modern Android design language inspired by Google's Pixel and Material You ecosystem.
 
-The interface uses dynamic wallpaper-based colors, adaptive light/dark themes, rounded surfaces and a distraction-free compass experience.
+The UI uses dynamic wallpaper-based colors, adaptive themes, rounded surfaces and smooth motion while keeping the compass experience focused and distraction-free.
+
+## Tech Stack
+
+- Kotlin
+- Jetpack Compose
+- Material 3
+- Android Sensor Framework
+- Android Location APIs
+- Material You Dynamic Color
+- Native Android App Widgets
 
 ## Compass Modes
 
 ### Magnetic North
-Uses the Earth's magnetic field as detected by the device's sensors.
+Displays the direction based on the Earth's magnetic field detected by the device.
 
 ### True North
 Uses the device's location and magnetic declination to compensate for the difference between magnetic north and geographic north.
-
-## Project Structure
-
-The project is built as a native Android application using Jetpack Compose and follows a modular, maintainable architecture with separate handling for UI, sensors, location, preferences and theme management.
 
 ## License
 
