@@ -49,8 +49,16 @@ object CompassWidgetRenderer {
         // 1. Resolve Dynamic / Themed Colors
         val dynamicPrimary = if (AppThemeState.dynamicColorEnabled && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
             runCatching {
-                if (isDark) dynamicDarkColorScheme(context).primary else dynamicLightColorScheme(context).primary
-            }.getOrDefault(if (isDark) MdDarkPrimary else MdLightPrimary)
+                if (isDark) {
+                    Color(context.getColor(android.R.color.system_accent1_200))
+                } else {
+                    Color(context.getColor(android.R.color.system_accent1_600))
+                }
+            }.getOrElse {
+                runCatching {
+                    if (isDark) dynamicDarkColorScheme(context).primary else dynamicLightColorScheme(context).primary
+                }.getOrDefault(if (isDark) MdDarkPrimary else MdLightPrimary)
+            }
         } else {
             if (isDark) MdDarkPrimary else MdLightPrimary
         }

@@ -87,14 +87,16 @@ object CompassPreferences {
         updateDeclinationFromLocation(context)
     }
 
-    fun setThemeMode(mode: ThemeMode) {
+    fun setThemeMode(mode: ThemeMode, context: Context? = null) {
         AppThemeState.themeMode = mode
         prefs?.edit()?.putString(KEY_THEME_MODE, mode.name)?.apply()
+        context?.let { com.example.widget.CompassWidgetUpdateManager.updateAllWidgets(it) }
     }
 
-    fun setDynamicColor(enabled: Boolean) {
+    fun setDynamicColor(enabled: Boolean, context: Context? = null) {
         AppThemeState.dynamicColorEnabled = enabled
         prefs?.edit()?.putBoolean(KEY_DYNAMIC_COLOR, enabled)?.apply()
+        context?.let { com.example.widget.CompassWidgetUpdateManager.updateAllWidgets(it) }
     }
 
     fun setDialShape(shape: CompassDialShape) {
